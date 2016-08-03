@@ -12,6 +12,10 @@ class Owner < ActiveRecord::Base
   validates :zip, presence: true 
   validates :emerg_name, presence: true 
   validates :emerg_phone, presence: true 
+
+  def name
+    "#{last_name}, #{first_name}"
+  end
   
 
   scope :recent, -> (minutes_past=60){where("created_at >?",minutes_past.minutes.ago)}

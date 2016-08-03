@@ -8,6 +8,14 @@
     <%= f.association :vet %>
     <%= f.input :medical_info %>
     <%= f.input :in_daycare %>
+    <%= f.simple_fields_for(:custodies) do |custody_fields| %>
+    <%= custody_fields.association :owner, collection: Owner.order(:last_name, :first_name) %>
+    <%# Only show the destroy checkbox if the record is already saved  %>
+    <% if custody_fields.object.persisted? %>
+    <%= custody_fileds.input :_destroy, as: :boolean %>
+
+    <% end %>
+  <% end %>
   </div>
 
   <div class="form-actions">

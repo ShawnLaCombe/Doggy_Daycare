@@ -15,10 +15,12 @@ class DogsController < ApplicationController
   # GET /dogs/new
   def new
     @dog = Dog.new
+    @dog.custodies.build
   end
 
   # GET /dogs/1/edit
   def edit
+    @dog.custodies.build
   end
 
   # POST /dogs
@@ -69,6 +71,6 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :breed_id, :dob, :vet_id, :medical_info, :in_daycare)
+      params.require(:dog).permit(:name, :breed_id, :dob, :vet_id, :medical_info, :in_daycare, custodies_attributes: [:id, :owner_id, :_destroy])
     end
 end
